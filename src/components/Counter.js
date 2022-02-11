@@ -1,7 +1,7 @@
 //El primer paso es importar las librerias de React y los componentes de React-Native
 import React, { useState } from "react";
-import { Text, View, Pressable } from "react-native";
-import MyNameStyle from '../styles/myNameStyles'
+import { Text, View, Pressable, TouchableHighlight, TouchableOpacity } from "react-native";
+import MyNameStyle from '../../styles/myNameStyles'
 
 //Estilos del componente
 const styles = MyNameStyle;
@@ -9,6 +9,17 @@ const styles = MyNameStyle;
 const Counter = () => {
     const [number, setNumber] = useState(0);
     const [havingDebt, setHavingDebt] = useState(false);
+
+    const counterPlus = (isPlus) => {
+      if(isPlus){
+        setNumber(number+1);
+        number >=0 ? setHavingDebt(false) : setHavingDebt(true);
+      }
+      else{
+        setNumber(number-1);
+        number <=0 ? setHavingDebt(true) : setHavingDebt(false);
+      }
+    }
   
     return (
       <View style={styles.counterContainer}>
@@ -21,32 +32,18 @@ const Counter = () => {
           {number.toLocaleString()}
         </Text>
         <View style={styles.btnCounterContainer}>
-          <Pressable
+          <TouchableOpacity
             style={[styles.btnCounter, styles.paying]}
-            onPress={() => {
-              if (number <= 0) {
-                setHavingDebt(true);
-              } else {
-                setHavingDebt(false);
-              }
-              setNumber(number - 1);
-            }}
+            onPress={() => { counterPlus(false) }}
           >
             <Text>return a slice</Text>
-          </Pressable>
-          <Pressable
+          </TouchableOpacity>
+          <TouchableOpacity
             style={[styles.btnCounter, styles.taking]}
-            onPress={() => {
-              if (number >= 0) {
-                setHavingDebt(false);
-              } else {
-                setHavingDebt(true);
-              }
-              setNumber(number + 1);
-            }}
+            onPress={() => { counterPlus(true) }}
           >
             <Text>Eat a slice</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       </View>
     );

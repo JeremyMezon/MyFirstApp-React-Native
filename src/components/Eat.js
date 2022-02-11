@@ -1,7 +1,7 @@
 //El primer paso es importar las librerias de React y los componentes de React-Native
 import React, { useState } from "react";
 import { Text, View, Pressable } from "react-native";
-import MyNameStyle from '../styles/myNameStyles'
+import MyNameStyle from '../../styles/myNameStyles'
 
 //Estilos del componente
 const styles = MyNameStyle;
